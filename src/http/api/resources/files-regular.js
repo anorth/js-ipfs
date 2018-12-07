@@ -1,6 +1,6 @@
 'use strict'
 
-const mh = require('multihashes')
+const CID = require('cids')
 const multipart = require('ipfs-multipart')
 const debug = require('debug')
 const tar = require('tar-stream')
@@ -50,7 +50,7 @@ exports.parseKey = (request, reply) => {
   }
 
   try {
-    mh.fromB58String(key)
+    new CID(key) // eslint-disable-line
   } catch (err) {
     log.error(err)
     return reply({
